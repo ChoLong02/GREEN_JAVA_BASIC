@@ -26,7 +26,7 @@ public class KioskMain {
 		
 		System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
 		System.out.println("▒▒ 상무 떡볶이 1호점");
-		System.out.println("▒▒   Version 1.0");
+		System.out.println("▒▒   Version 1.2");
 		System.out.println("▒▒   Written by ChoLong02");
 		System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
 		System.out.println("MSG: 상무떡볶이 1호점을 방문해주셔서 감사합니다.");
