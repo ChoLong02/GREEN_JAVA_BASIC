@@ -7,8 +7,8 @@ public class KioskMain {
 		
 		Scanner sc = new Scanner(System.in);
 		PrintMenu printMenu = new PrintMenu();
-		KioskService kioskService = new KioskService();
-		
+		KioskService kioskService = new KioskService(); 
+		 
 		// 배열을 활용해서 메뉴표와 가격표
 		String [] nameSet = {"기본세트", "커플세트", "가족세트"};
 		String [] nameSingle = {"떡볶이", "오뎅", "순대"};
