@@ -2,6 +2,9 @@ package greenmall;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class ProductDAO {
@@ -49,21 +52,113 @@ public class ProductDAO {
 		
 	}
 	
-	// 2.제품삭제
+	// 2.제품삭제 
 	public void productDelete() {
 		System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
 		System.out.println("▒▒ 삭제하고싶은 제품번호를 입력하세요.");
+		System.out.print("제품번호>>");
+		int pno = sc.nextInt();
+		
+		try {
+			conn = DBManager.getConnection();
+			String sql = "DELETE FROM green.tbl_product "
+					   + "WHERE pno = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pno);
+			int result = pstmt.executeUpdate();
+			 
+			if(result > 0) {
+				System.out.println("삭제 성공");
+			} else {
+				System.out.println("삭제 실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
 	}
 	
 	// 3.제품조회
 	public void productSelect() {
 		System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
-		System.out.println("▒▒ 총 ?건의 제품이 조회되었습니다.");
+		
+		try {
+			conn = DBManager.getConnection();
+			String sql = "SELECT * FROM green.tbl_product";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs  = pstmt.executeQuery();
+			
+			int count = 0;
+			while(rs.next()) {
+				int pno = rs.getInt("pno");
+				String pname = rs.getString("pname");
+				int price = rs.getInt("price");
+				Date regdate = rs.getDate("regdate");
+				System.out.println(pno + ", " + pname + ", " + price + ", " + regdate);
+				count++;
+			}
+			 
+			System.out.println("▒▒ 총 " + count + "건의 제품이 조회되었습니다.");
+			System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally { 
+			
+		}
+		
+		
+		
+		
 	}
 	
 	// 4.제품검색
 	public void productSearch() {
 		System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
 		System.out.println("▒▒ 검색하고싶은 제품번호 또는 제품명을 입력하세요.");
+		System.out.print("키워드>>");
+		String keyword = sc.nextLine();
+		
+		try {
+			conn = DBManager.getConnection();
+			String sql = "SELECT * FROM green.tbl_product "
+					   + "WHERE pname LIKE ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + keyword + "%");
+			ResultSet rs = pstmt.executeQuery();
+			
+			int count = 0;
+			while(rs.next()) {
+				int pno = rs.getInt("pno");
+				String pname = rs.getString("pname");
+				int price = rs.getInt("price");
+				Date regdate = rs.getDate("regdate");
+				System.out.println(pno + ", " + pname + ", " + price + ", " + regdate);
+				count++;
+			} 
+			 
+			System.out.println("▒▒ 총 " + count + "건의 제품이 검색되었습니다.");
+			System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

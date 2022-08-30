@@ -17,12 +17,12 @@ public class ShopMain {
 		System.out.println("▒▒ 3.제품조회");
 		System.out.println("▒▒ 4.제품검색");
 		
-		System.out.print("번호>> ");
+		System.out.print("번호>> "); 
 		Scanner sc = new Scanner(System.in);
 		int num = sc.nextInt();
 		
 		ProductDAO pDao = new ProductDAO();
-		if (num == 1) {
+		if (num == 1) { 
 			pDao.productInsert();
 		} else if (num == 2) {
 			pDao.productDelete();
